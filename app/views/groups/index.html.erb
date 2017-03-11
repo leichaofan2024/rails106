@@ -1,0 +1,35 @@
+<div class="pull-right">
+  <%= link_to("新建", new_group_path, :class => "btn btn-primary" ) %>
+</div>
+<div class="container-fluid">
+<h2 class="text-center">Superlei个人社群</h2>
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>主题</th>
+      <th>简介</th>
+      <th>创建者</th>
+      <th>创建时间</th>
+      <th colspan="2">管理</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @groups.each do |group| %>
+    <tr>
+      <td>#</td>
+      <td><%= link_to(group.title, group_path(group)) %></td>
+      <td><%= group.description %></td>
+      <td><%= group.user.email %></td>
+      <td><%= group.created_at %></td>
+      <% if current_user == group.user %>
+      <td>
+        <%= link_to("编辑", edit_group_path(group), :class => "btn btn-primary") %>
+        <%= link_to("删除", group_path(group), method: :delete, class: "btn btn-danger")%> </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
