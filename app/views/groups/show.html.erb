@@ -1,3 +1,12 @@
+<div class="pull-right">
+  <% if current_user.is_member_of?(@group) %>
+  <label class="label label-success">群组成员</label>
+  <%= link_to("退群", join_group_path(@group), method: :post, :class => "btn btn-danger") %>
+  <% else %>
+  <label class="label label-warning">不是群组成员</label>
+  <%= link_to("加入群组", join_group_path(@group),method: :post, :class => "btn btn-primary")%>
+  <% end %>
+</div>
 <div class="text-center" >
   <h2><%= @group.title %></h2>
   <%= @group.description %>

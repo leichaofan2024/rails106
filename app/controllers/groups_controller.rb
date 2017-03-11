@@ -32,6 +32,20 @@ class GroupsController < ApplicationController
    redirect_to groups_path,alert: "你已成功删除！"
 
  end
+ def join
+   @group = Group.find(params[:id])
+   if !current_user.is_member_of?(@group)
+    #  current_user.participated_groups << @group
+     @group.members << current_user
+     redirect_to group_path(@group),alert: "加入成功！"
+   elsif current_user.is_member_of?(@group)
+     current_user.participated_groups.delete(@group)
+    #  @group.members.delete(current_user)
+     redirect_to group_path(@group),alert: "退出成功！"
+   end
+
+ end
+
  private
 
  def group_params
