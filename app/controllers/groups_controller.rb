@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
   end
   def show
     @group = Group.find(params[:id])
-    @posts = @group.posts
+    @posts = @group.posts.order("updated_at DESC")
   end
   def new
     @group = Group.new
@@ -56,6 +56,10 @@ class GroupsController < ApplicationController
     if !current_user.is_member_of?(@group)
       redirect_to group_path(@group)
     end
+  end
+  def mypost
+   @groups = Group.all
+    @posts = current_user.posts
   end
  private
 

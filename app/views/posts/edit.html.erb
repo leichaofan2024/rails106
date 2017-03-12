@@ -1,0 +1,5 @@
+<%= simple_form_for [@group,@post] do |f| %>
+<%= f.input :title, input_html: { class: "control-form"} %>
+<%= f.input :content, input_html: { class: "control-form"} %>
+<%= f.submit "Submit", disable_with: "Sbumiting....." %>
+<% end %>

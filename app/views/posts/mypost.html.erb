@@ -1,0 +1,22 @@
+<div class="col-md-10">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>标题</th>
+        <th>所属群组</th>
+        <th>更新时间</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% [@groups,@posts].each do |post| %>
+      <tr>
+        <td>#</td>
+        <td><%= post.title %></td>
+        <td><%= post.group %></td>
+        <td><%= post.updated_at %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
