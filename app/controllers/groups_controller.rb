@@ -1,10 +1,11 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!, only:[:new, :edit, :destroy, :update]
+  before_action :authenticate_user!, only:[:new, :edit, :destroy, :update,:people,:join]
   def index
     @groups = Group.all
   end
   def show
     @group = Group.find(params[:id])
+    @posts = @group.posts
   end
   def new
     @group = Group.new
@@ -12,7 +13,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.user = current_user
-    current_user.participated_groups << @group 
+    current_user.participated_groups << @group
     if @group.save
        redirect_to groups_path
     else
@@ -50,7 +51,11 @@ class GroupsController < ApplicationController
     @groups = current_user.participated_groups
   end
   def people
+
     @group = Group.find(params[:id])
+    if !current_user.is_member_of?(@group)
+      redirect_to group_path(@group)
+    end
   end
  private
 

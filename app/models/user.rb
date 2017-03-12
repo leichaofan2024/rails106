@@ -5,10 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :groups
   has_many :relationships
+  has_many :posts
   has_many :participated_groups,:through => :relationships, :source => :group
   def is_member_of?(group)
     participated_groups.include?(group)
   end
+
   # def join!(group)
   #   current_user.participated_groups << group
   #   @group.members << current_user
