@@ -1,0 +1,22 @@
+<div class="">
+  <h3>拥有社员：
+    <%= @group.members.count %>
+  </h3>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>成员名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @group.members.each do |member| %>
+    <tr>
+      <td>#</td>
+      <td><%= member.email %></td>
+    </tr>
+    <% end %>
+  </tbody>
+
+</table>

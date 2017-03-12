@@ -7,6 +7,9 @@
   <%= link_to("加入群组", join_group_path(@group),method: :post, :class => "btn btn-primary")%>
   <% end %>
 </div>
+<div class="">
+  <%= link_to("成员列表", people_group_path(@group), method: :post, :class => "btn btn-default") %>
+</div>
 <div class="text-center" >
   <h2><%= @group.title %></h2>
   <%= @group.description %>

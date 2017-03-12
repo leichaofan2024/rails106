@@ -12,6 +12,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.user = current_user
+    current_user.participated_groups << @group 
     if @group.save
        redirect_to groups_path
     else
@@ -35,8 +36,8 @@ class GroupsController < ApplicationController
  def join
    @group = Group.find(params[:id])
    if !current_user.is_member_of?(@group)
-    #  current_user.participated_groups << @group
-     @group.members << current_user
+     current_user.participated_groups << @group
+    #  @group.members << current_user
      redirect_to group_path(@group),alert: "加入成功！"
    elsif current_user.is_member_of?(@group)
      current_user.participated_groups.delete(@group)
@@ -44,8 +45,13 @@ class GroupsController < ApplicationController
      redirect_to group_path(@group),alert: "退出成功！"
    end
 
- end
-
+  end
+  def groupmember
+    @groups = current_user.participated_groups
+  end
+  def people
+    @group = Group.find(params[:id])
+  end
  private
 
  def group_params
